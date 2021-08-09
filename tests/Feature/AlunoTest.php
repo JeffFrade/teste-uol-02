@@ -48,4 +48,12 @@ class AlunoTest extends TestCase
         $aluno = $aluno->index($params);
         $this->assertEquals(1, $aluno->count());
     }
+
+    public function testAlunoShow(): void
+    {
+        $aluno = new Aluno();
+        $aluno = $aluno->show(1);
+        
+        $this->assertNotEmpty($aluno);
+    }
 }
