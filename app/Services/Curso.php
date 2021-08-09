@@ -32,4 +32,12 @@ class Curso
 
         return $this->cursoRepository->index($data['name'] ?? '', $data['date'] ?? '');
     }
+
+    /**
+     * @return int
+     */
+    public function indiceCursos()
+    {
+        return $this->cursoRepository->indiceCursos();
+    }
 }

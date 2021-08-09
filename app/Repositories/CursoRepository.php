@@ -35,4 +35,12 @@ class CursoRepository extends AbstractRepository
 
         return $model->paginate();
     }
+
+    /**
+     * @return int
+     */
+    public function indiceCursos()
+    {
+        return $this->model->count();
+    }
 }

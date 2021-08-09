@@ -32,7 +32,8 @@ class DashboardController extends Controller
     public function index()
     {
         $indiceAlunos = $this->aluno->indiceAlunos();
+        $indiceCursos = $this->curso->indiceCursos();
 
-        return view('dashboard', compact('indiceAlunos'));
+        return view('dashboard', compact('indiceAlunos', 'indiceCursos'));
     }
 }
