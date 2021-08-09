@@ -229,6 +229,7 @@ return [
 
         // Helpers
         'PaginateHelper' => \App\Helpers\PaginateHelper::class,
+        'DateHelper' => \App\Helpers\DateHelper::class,
     ],
 
 ];

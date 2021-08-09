@@ -28,4 +28,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::put('/update/{id}', 'AlunoController@update')->name('alunos.update');
         Route::delete('/delete/{id}', 'AlunoController@delete')->name('alunos.delete');
     });
+
+    Route::group(['prefix' => 'cursos'], function () {
+        Route::get('/', 'CursoController@index')->name('cursos.index');
+    });
 });

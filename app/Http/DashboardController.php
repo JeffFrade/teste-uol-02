@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Core\Support\Controller;
 use App\Services\Aluno;
+use App\Services\Curso;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
@@ -14,9 +15,15 @@ class DashboardController extends Controller
      */
     private $aluno;
 
-    public function __construct(Aluno $aluno)
+    /**
+     * @var Curso
+     */
+    private $curso;
+
+    public function __construct(Aluno $aluno, Curso $curso)
     {
         $this->aluno = $aluno;
+        $this->curso = $curso;
     }
 
     /**
