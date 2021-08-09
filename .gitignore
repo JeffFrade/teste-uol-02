@@ -1,7 +1,7 @@
 /.idea
 /.vscode
-vendor/
-node-modules/
+/vendor
+/node-modules
 composer.lock
 package-lock.json
 .phpunit.result.cache
