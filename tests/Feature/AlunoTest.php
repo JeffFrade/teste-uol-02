@@ -53,7 +53,21 @@ class AlunoTest extends TestCase
     {
         $aluno = new Aluno();
         $aluno = $aluno->show(1);
-        
+
         $this->assertNotEmpty($aluno);
+    }
+
+    public function testAlunoUpdate()
+    {
+        $aluno = new Aluno();
+
+        $data = [
+            'email' => 'admin@mail.com'
+        ];
+
+        $aluno->update($data, 1);
+        $aluno = $aluno->show(1);
+
+        $this->assertEquals('admin@mail.com', $aluno->email);
     }
 }
