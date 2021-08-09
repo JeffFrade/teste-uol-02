@@ -24,5 +24,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('/', 'AlunoController@index')->name('alunos.index');
         Route::get('/create', 'AlunoController@create')->name('alunos.create');
         Route::post('/store', 'AlunoController@store')->name('alunos.store');
+        Route::get('/edit/{id}', 'AlunoController@edit')->name('alunos.edit');
+        Route::put('/update/{id}', 'AlunoController@update')->name('alunos.update');
     });
 });

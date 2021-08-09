@@ -62,6 +62,32 @@ class AlunoController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return Factory|View
+     */
+    public function edit(int $id)
+    {
+        $aluno = $this->aluno->show($id);
+
+        return view('aluno.edit', compact('aluno'));
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse|Redirector
+     * @throws ValidationException
+     */
+    public function update(Request $request, int $id)
+    {
+        $params = $this->toValidate($request, true);
+        $this->aluno->update($params, $id);
+
+        return redirect(route('alunos.index'))
+            ->with('message', 'Aluno editado com sucesso!');
+    }
+
+    /**
      * @param Request $request
      * @param bool $isUpdate
      * @return array

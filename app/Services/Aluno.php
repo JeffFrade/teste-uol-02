@@ -46,4 +46,27 @@ class Aluno
 
         $this->alunoRepository->create($data);
     }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function show(int $id)
+    {
+        return $this->alunoRepository->findFirst('id', $id);
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @return void
+     */
+    public function update(array $data, int $id)
+    {
+        if (isset($data['senha'])) {
+            $data['senha'] = bcrypt($data['senha']);
+        }
+
+        $this->alunoRepository->update($data, $id);
+    }
 }

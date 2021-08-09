@@ -41,7 +41,7 @@
                                     <td>{{ $aluno->nome }}</td>
                                     <td>{{ $aluno->email }}</td>
                                     <td style="width: 1%" nowrap="">
-                                        <a href="#" class="btn btn-light btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('alunos.edit', ['id' => $aluno->id]) }}" class="btn btn-light btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
                                         &nbsp;
                                         <a href="#" class="btn btn-danger btn-xs btn-del" data-id="{{ $aluno->id }}" title="Excluir"><i class="fa fa-trash"></i></a>
                                     </td>
