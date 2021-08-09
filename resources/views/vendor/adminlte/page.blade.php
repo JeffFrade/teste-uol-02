@@ -47,6 +47,8 @@
             {{-- Main Content --}}
             <div class="content">
                 <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
+                    @include('util.success')
+                    @include('util.exception')
                     @yield('content')
                 </div>
             </div>

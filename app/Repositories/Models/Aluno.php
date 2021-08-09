@@ -22,7 +22,13 @@ class Aluno extends Model
     protected $fillable = [
         'nome',
         'email',
-        'senha',
-        'data_admissao'
+        'senha'
+    ];
+
+    /**
+     * @var array
+     */
+    protected $hidden = [
+        'senha'
     ];
 }

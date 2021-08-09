@@ -172,6 +172,7 @@ return [
         App\Core\Providers\AppServiceProvider::class,
         App\Core\Providers\AuthServiceProvider::class,
         App\Core\Providers\RouteServiceProvider::class,
+        App\Core\Providers\ModelServiceProvider::class,
 
     ],
 
@@ -226,6 +227,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
+        // Helpers
+        'PaginateHelper' => \App\Helpers\PaginateHelper::class,
     ],
 
 ];

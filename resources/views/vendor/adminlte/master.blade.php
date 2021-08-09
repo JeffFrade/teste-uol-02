@@ -71,6 +71,10 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -100,6 +104,10 @@
             <livewire:scripts />
         @endif
     @endif
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('js/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
