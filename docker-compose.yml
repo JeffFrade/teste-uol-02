@@ -46,6 +46,8 @@ services:
       - "--innodb_use_native_aio=0"
     ports:
       - "${DB_PORT}:3306"
+    expose:
+      - "${DB_PORT}"
     environment:
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
