@@ -19,4 +19,8 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
+
+    Route::group(['prefix' => 'alunos'], function () {
+        Route::get('/', 'AlunoController@index')->name('alunos.index');
+    });
 });

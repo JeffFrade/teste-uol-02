@@ -226,6 +226,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
+        // Helpers
+        'PaginateHelper' => \App\Helpers\PaginateHelper::class,
     ],
 
 ];
