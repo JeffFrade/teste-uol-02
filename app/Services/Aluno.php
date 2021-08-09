@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\AlunoNotFoundException;
 use App\Repositories\AlunoRepository;
 
 class Aluno
@@ -68,5 +69,21 @@ class Aluno
         }
 
         $this->alunoRepository->update($data, $id);
+    }
+
+    /**
+     * @param int $id
+     * @throws AlunoNotFoundException
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        $aluno = $this->show($id);
+
+        if (empty($aluno)) {
+            throw new AlunoNotFoundException('Aluno inexistente');
+        }
+
+        $this->alunoRepository->delete($id);
     }
 }

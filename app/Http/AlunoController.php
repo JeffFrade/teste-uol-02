@@ -3,8 +3,11 @@
 namespace App\Http;
 
 use App\Core\Support\Controller;
+use App\Core\Support\Traits\ErrorTrait;
+use App\Exceptions\AlunoNotFoundException;
 use App\Services\Aluno;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -13,6 +16,8 @@ use Illuminate\View\View;
 
 class AlunoController extends Controller
 {
+    use ErrorTrait;
+
     /**
      * @var Aluno
      */
@@ -85,6 +90,23 @@ class AlunoController extends Controller
 
         return redirect(route('alunos.index'))
             ->with('message', 'Aluno editado com sucesso!');
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function delete(int $id)
+    {
+        try {
+            $this->aluno->delete($id);
+
+            return response()->json([
+                'message' => 'Aluno excluído com sucesso!'
+            ]);
+        } catch (AlunoNotFoundException $e) {
+            return response()->json($this->errorFromException($e));
+        }
     }
 
     /**
