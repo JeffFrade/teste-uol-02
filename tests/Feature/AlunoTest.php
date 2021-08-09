@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Exceptions\AlunoNotFoundException;
 use App\Services\Aluno;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -57,7 +58,7 @@ class AlunoTest extends TestCase
         $this->assertNotEmpty($aluno);
     }
 
-    public function testAlunoUpdate()
+    public function testAlunoUpdate(): void
     {
         $aluno = new Aluno();
 
@@ -71,12 +72,20 @@ class AlunoTest extends TestCase
         $this->assertEquals('admin@mail.com', $aluno->email);
     }
 
-    public function testAlunoDelete()
+    public function testAlunoDelete(): void
     {
         $aluno = new Aluno();
         $aluno->delete(2);
 
         $aluno = $aluno->show(2);
         $this->assertEmpty($aluno);
+    }
+
+    public function testAlunoDeleteAlunoNotFoundException(): void
+    {
+        $this->expectException(AlunoNotFoundException::class);
+
+        $aluno = new Aluno();
+        $aluno->delete(2000);
     }
 }
