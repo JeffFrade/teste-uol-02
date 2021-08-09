@@ -1,5 +1,30 @@
-$('.btn-filter').on('click', function () {
+$('.btn-clear').on('click', function (e) {
+    e.preventDefault();
+
+    $(document).find('input').val('');
+    $(document).find('textarea').val('');
+    $(".multi-select").val(null).trigger("change");
+    $(".single-select").val(null).trigger("change");
+});
+
+$('.btn-overlay').on('click', function (e) {
     $('.overlay').removeClass('overlay-hidden');
+});
+
+$('.btn-save').on('click', function (e) {
+    $('.overlay').removeClass('overlay-hidden');
+});
+
+$.notifyDefaults({
+    z_index: 100000
+});
+
+$('.form-error').each(function (index) {
+    $.notify({message: $(this).text()}, {type: 'danger'});
+});
+
+$('.form-success').each(function (index) {
+    $.notify({message: $(this).text()}, {type: 'success'});
 });
 
 $('.datepicker').datepicker({
@@ -10,3 +35,5 @@ $('.datepicker').datepicker({
     autoclose: true,
     todayHighlight: true
 });
+
+

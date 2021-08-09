@@ -35,4 +35,17 @@ class AlunoController extends Controller
 
         return view('aluno.index', compact('params', 'alunos'));
     }
+
+    /**
+     * @return Factory|View
+     */
+    public function create()
+    {
+        return view('aluno.create');
+    }
+
+    public function store(Request $request)
+    {
+
+    }
 }

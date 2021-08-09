@@ -22,5 +22,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
     Route::group(['prefix' => 'alunos'], function () {
         Route::get('/', 'AlunoController@index')->name('alunos.index');
+        Route::get('/create', 'AlunoController@create')->name('alunos.create');
+        Route::post('/store', 'AlunoController@store')->name('alunos.store');
     });
 });
