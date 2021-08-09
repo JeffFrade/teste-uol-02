@@ -35,4 +35,12 @@ class AlunoRepository extends AbstractRepository
 
         return $model->paginate();
     }
+
+    /**
+     * @return int
+     */
+    public function indiceAlunos()
+    {
+        return $this->model->count();
+    }
 }

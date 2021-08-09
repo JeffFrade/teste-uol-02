@@ -8,11 +8,17 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <p class="mb-0">You are logged in!</p>
+        <div class="col-4">
+            <div class="small-box bg-blue">
+                <div class="inner">
+                    <h3>{{ $indiceAlunos }}</h3>
+
+                    <p>Alunos</p>
                 </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <a href="{{ route('alunos.index') }}" class="small-box-footer">Mais Informações &nbsp;<i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
     </div>

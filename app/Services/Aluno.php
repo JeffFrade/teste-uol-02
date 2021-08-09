@@ -27,4 +27,12 @@ class Aluno
     {
         return $this->alunoRepository->index($params['search'] ?? '', $params['date'] ?? '');
     }
+
+    /**
+     * @return int
+     */
+    public function indiceAlunos()
+    {
+        return $this->alunoRepository->indiceAlunos();
+    }
 }
