@@ -18,7 +18,6 @@ class CreateAlunosTable extends Migration
             $table->string('nome');
             $table->string('email');
             $table->string('senha');
-            $table->boolean('status');
             $table->timestamps();
         });
     }
