@@ -20,12 +20,12 @@ class Aluno
     }
 
     /**
-     * @param array $params
+     * @param array $data
      * @return mixed
      */
-    public function index(array $params)
+    public function index(array $data)
     {
-        return $this->alunoRepository->index($params['search'] ?? '', $params['date'] ?? '');
+        return $this->alunoRepository->index($data['search'] ?? '', $data['date'] ?? '');
     }
 
     /**
@@ -34,5 +34,16 @@ class Aluno
     public function indiceAlunos()
     {
         return $this->alunoRepository->indiceAlunos();
+    }
+
+    /**
+     * @param array $data
+     * @return void
+     */
+    public function store(array $data)
+    {
+        $data['senha'] = bcrypt($data['senha']);
+
+        $this->alunoRepository->create($data);
     }
 }

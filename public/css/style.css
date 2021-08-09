@@ -5,3 +5,7 @@
 .pull-right {
     float: right;
 }
+
+.required {
+    color: #F00;
+}

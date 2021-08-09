@@ -106,7 +106,7 @@
     @endif
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js"></script>
+    <script src="{{ asset('js/bootstrap-notify.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 
     {{-- Custom Scripts --}}
