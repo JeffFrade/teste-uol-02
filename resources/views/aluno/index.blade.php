@@ -81,13 +81,14 @@
                     url: 'alunos/delete/' + $(this).data('id'),
                     timeout: 0,
                     success: function (response) {
+
                         $.notify({message: response.message}, {type: 'success'});
                         setTimeout(function () {
                             location.reload();
                         }, 2000);
                     },
                     error: function (err) {
-                        $.notify({message: err.error}, {type: 'danger'});
+                        $.notify({message: err.error ?? 'Ocorreu um erro, favor consultar a TI'}, {type: 'danger'});
                         console.error(err);
                         $('.overlay').addClass('overlay-hidden');
                     }

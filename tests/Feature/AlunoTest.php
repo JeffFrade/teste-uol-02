@@ -25,7 +25,7 @@ class AlunoTest extends TestCase
         $aluno = new Aluno();
         $total = $aluno->indiceAlunos();
 
-        $this->assertEquals(52, $total);
+        $this->assertEquals(50, $total);
         $this->assertIsInt($total);
     }
 
@@ -69,5 +69,14 @@ class AlunoTest extends TestCase
         $aluno = $aluno->show(1);
 
         $this->assertEquals('admin@mail.com', $aluno->email);
+    }
+
+    public function testAlunoDelete()
+    {
+        $aluno = new Aluno();
+        $aluno->delete(2);
+
+        $aluno = $aluno->show(2);
+        $this->assertEmpty($aluno);
     }
 }
