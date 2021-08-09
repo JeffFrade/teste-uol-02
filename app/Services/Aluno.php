@@ -25,7 +25,7 @@ class Aluno
      */
     public function index(array $data)
     {
-        return $this->alunoRepository->index($data['search'] ?? '', $data['date'] ?? '');
+        return $this->alunoRepository->index($data['search'] ?? '');
     }
 
     /**

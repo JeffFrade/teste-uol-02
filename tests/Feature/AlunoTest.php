@@ -25,7 +25,27 @@ class AlunoTest extends TestCase
         $aluno = new Aluno();
         $total = $aluno->indiceAlunos();
 
-        $this->assertEquals(50, $total);
+        $this->assertEquals(52, $total);
         $this->assertIsInt($total);
+    }
+
+    public function testAlunoStore(): void
+    {
+        $aluno = new Aluno();
+
+        $params = [
+            'nome' => 'Admin',
+            'email' => 'admin@mail.com',
+            'senha' => '123'
+        ];
+
+        $aluno->store($params);
+
+        $params = [
+            'search' => 'admin@mail.com',
+        ];
+
+        $aluno = $aluno->index($params);
+        $this->assertEquals(1, $aluno->count());
     }
 }

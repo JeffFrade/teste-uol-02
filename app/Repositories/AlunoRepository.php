@@ -17,20 +17,15 @@ class AlunoRepository extends AbstractRepository
 
     /**
      * @param string $search
-     * @param string $date
      * @return mixed
      */
-    public function index(string $search, string $date)
+    public function index(string $search)
     {
         $model = $this->model;
 
         if (!empty($search)) {
             $model = $model->where('nome', 'like', '%' . $search . '%')
                 ->orWhere('email', 'like', '%' . $search . '%');
-        }
-
-        if (!empty($date)) {
-            $model = $model->where('data_admissao', $date);
         }
 
         return $model->paginate();
