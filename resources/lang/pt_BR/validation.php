@@ -178,5 +178,8 @@ return [
         'year'                  => 'ano',
         'email'                 => 'e-mail',
         'remember'              => 'lembrar-me',
+        'aluno_id'              => 'nome do aluno',
+        'curso_id'              => 'nome do curso',
+        'data_admissao'         => 'data de admissão'
     ],
 ];
