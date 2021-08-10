@@ -53,4 +53,9 @@ class MatriculaController extends Controller
 
         return view('matricula.index', compact('params', 'matriculas', 'alunos', 'cursos'));
     }
+
+    public function updateStatus(int $id)
+    {
+
+    }
 }
