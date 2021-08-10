@@ -96,8 +96,8 @@ class MatriculaTest extends TestCase
             'curso_id' => 7
         ];
 
-        $matricula->update($data, 1);
-        $matricula = $matricula->show(1);
+        $matricula->update($data, 2);
+        $matricula = $matricula->show(2);
 
         $this->assertEquals(50, $matricula->aluno_id);
         $this->assertEquals(7, $matricula->curso_id);
@@ -130,7 +130,7 @@ class MatriculaTest extends TestCase
             'curso_id' => 7
         ];
 
-        $matricula->update($data, 1);
+        $matricula->update($data, 2);
 
         $this->expectExceptionMessage('Aluno inexistente');
     }
@@ -146,9 +146,28 @@ class MatriculaTest extends TestCase
             'curso_id' => 7000
         ];
 
-        $matricula->update($data, 1);
+        $matricula->update($data, 2);
 
         $this->expectExceptionMessage('Curso inexistente');
+    }
+
+    public function testMatriculaDelete()
+    {
+        $this->expectException(MatriculaNotFoundException::class);
+        $matricula = new Matricula();
+
+        $matricula->delete(2);
+        $matricula->show(2);
+        $this->expectExceptionMessage('Matrícula inexistente');
+    }
+
+    public function testMatriculaDeleteMatriculaNotFoundException()
+    {
+        $this->expectException(MatriculaNotFoundException::class);
+        $matricula = new Matricula();
+
+        $matricula->delete(2000);
+        $this->expectExceptionMessage('Matrícula inexistente');
     }
 
     public function testMatriculaIndiceDashboard(): void
