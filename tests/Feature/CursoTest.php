@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Services\Aluno;
 use App\Services\Curso;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -47,5 +48,27 @@ class CursoTest extends TestCase
 
         $curso = $curso->index($params);
         $this->assertEquals(1, $curso->count());
+    }
+
+    public function testCursoShow(): void
+    {
+        $curso = new Curso();
+        $curso = $curso->show(1);
+
+        $this->assertNotEmpty($curso);
+    }
+
+    public function testCursoUpdate(): void
+    {
+        $curso = new Curso();
+
+        $data = [
+            'nome' => 'Admin'
+        ];
+
+        $curso->update($data, 1);
+        $curso = $curso->show(1);
+
+        $this->assertEquals('Admin', $curso->nome);
     }
 }

@@ -67,10 +67,12 @@ class Curso
      */
     public function update(array $data, int $id)
     {
-        $data['data_inicio'] = $this->formatDate($data['date'], $data['hour']);
+        if (isset($data['date']) && isset($data['hour'])) {
+            $data['data_inicio'] = $this->formatDate($data['date'], $data['hour']);
 
-        unset($data['date']);
-        unset($data['hour']);
+            unset($data['date']);
+            unset($data['hour']);
+        }
 
         $this->cursoRepository->update($data, $id);
     }
