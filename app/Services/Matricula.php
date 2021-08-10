@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Exceptions\AlunoNotFoundException;
+use App\Exceptions\CursoNotFoundException;
 use App\Exceptions\MatriculaNotFoundException;
 use App\Helpers\StringHelper;
 use App\Repositories\MatriculaRepository;
@@ -14,11 +16,23 @@ class Matricula
     private $matriculaRepository;
 
     /**
+     * @var Aluno
+     */
+    private $aluno;
+
+    /**
+     * @var Curso
+     */
+    private $curso;
+
+    /**
      * Matricula constructor.
      */
     public function __construct()
     {
         $this->matriculaRepository = new MatriculaRepository();
+        $this->aluno = new Aluno();
+        $this->curso = new Curso();
     }
 
     /**
@@ -55,6 +69,20 @@ class Matricula
         }
 
         throw new MatriculaNotFoundException('Matrícula inexistente');
+    }
+
+    /**
+     * @param array $data
+     * @throws AlunoNotFoundException
+     * @throws CursoNotFoundException
+     */
+    public function store(array $data)
+    {
+        $this->aluno->show($data['aluno_id']);
+        $this->curso->show($data['curso_id']);
+        $data['data_admissao'] .= ' 00:00:00';
+
+        $this->matriculaRepository->create($data);
     }
 
     /**

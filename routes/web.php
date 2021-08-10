@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
     Route::group(['prefix' => 'matriculas'], function () {
         Route::get('/', 'MatriculaController@index')->name('matriculas.index');
+        Route::get('/create', 'MatriculaController@create')->name('matriculas.create');
+        Route::post('/store', 'MatriculaController@store')->name('matriculas.store');
         Route::put('/update-status/{id}', 'MatriculaController@updateStatus')->name('matriculas.status');
     });
 });

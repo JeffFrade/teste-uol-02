@@ -44,7 +44,7 @@
                             &nbsp;
                             <button type="submit" class="btn btn-primary btn-filter"><i class="fa fa-search"></i>&nbsp; Buscar</button>
                             &nbsp;
-                            <a href="#" class="btn btn-light"><i class="fa fa-plus"></i>&nbsp; Cadastrar Matrícula</a>
+                            <a href="{{ route('matriculas.create') }}" class="btn btn-light"><i class="fa fa-plus"></i>&nbsp; Cadastrar Matrícula</a>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                                 <td>{{ $matricula->aluno->nome }}</td>
                                 <td>{{ $matricula->curso->nome }}</td>
                                 <td>{!! \App\TypeLabels\StatusValue::label($matricula->ativo) !!}</td>
-                                <td>{{ \App\Helpers\DateHelper::formatDateWithoutCarbon($matricula->data_admissao, 'd/m/Y - H:i') }}</td>
+                                <td>{{ \App\Helpers\DateHelper::formatDateWithoutCarbon($matricula->data_admissao, 'd/m/Y') }}</td>
                                 <td style="width: 1%" nowrap="">
                                     @if($matricula->ativo == 1)
                                         <a href="#" class="btn btn-danger btn-xs btn-status" title="Desativar Matrícula" data-id="{{ $matricula->id }}"><i class="fa fa-ban"></i></a>

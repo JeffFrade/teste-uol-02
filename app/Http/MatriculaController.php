@@ -4,13 +4,18 @@ namespace App\Http;
 
 use App\Core\Support\Controller;
 use App\Core\Support\Traits\ErrorTrait;
+use App\Exceptions\AlunoNotFoundException;
+use App\Exceptions\CursoNotFoundException;
 use App\Exceptions\MatriculaNotFoundException;
 use App\Services\Aluno;
 use App\Services\Curso;
 use App\Services\Matricula;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class MatriculaController extends Controller
@@ -60,6 +65,36 @@ class MatriculaController extends Controller
     }
 
     /**
+     * @return Factory|View
+     */
+    public function create()
+    {
+        $alunos = $this->aluno->getAll();
+        $cursos = $this->curso->getAll();
+
+        return view('matricula.create', compact('alunos', 'cursos'));
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Redirector
+     * @throws ValidationException
+     */
+    public function store(Request $request)
+    {
+        try {
+            $params = $this->toValidate($request);
+            $this->matricula->store($params);
+
+            return redirect(route('matriculas.index'))
+                ->with('message', 'Matrícula cadastrada com sucesso!');
+        } catch (AlunoNotFoundException | CursoNotFoundException $e) {
+            return redirect(route('matriculas.index'))
+                ->with('error', $e->getMessage());
+        }
+    }
+
+    /**
      * @param int $id
      * @return JsonResponse
      */
@@ -74,5 +109,22 @@ class MatriculaController extends Controller
         } catch (MatriculaNotFoundException $e) {
             return response()->json($this->errorFromException($e));
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     * @throws ValidationException
+     */
+    protected function toValidate(Request $request)
+    {
+        $toValidateArr = [
+            'curso_id' => 'required',
+            'aluno_id' => 'required',
+            'ativo' => 'required|size:1',
+            'data_admissao' => 'required|size:10'
+        ];
+
+        return $this->validate($request, $toValidateArr);
     }
 }
