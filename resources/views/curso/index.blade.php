@@ -45,7 +45,7 @@
                                 <td>{{ $curso->nome }}</td>
                                 <td>{{ \App\Helpers\DateHelper::formatDateWithoutCarbon($curso->data_inicio, 'd/m/Y - H:i') }}</td>
                                 <td style="width: 1%" nowrap="">
-                                    <a href="#" class="btn btn-light btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
+                                    <a href="{{ route('cursos.edit', ['id' => $curso->id]) }}" class="btn btn-light btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
                                     &nbsp;
                                     <a href="#" class="btn btn-danger btn-xs btn-del" data-id="{{ $curso->id }}" title="Excluir"><i class="fa fa-trash"></i></a>
                                 </td>

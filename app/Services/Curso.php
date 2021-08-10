@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Helpers\DateHelper;
+use App\Helpers\StringHelper;
 use App\Repositories\CursoRepository;
 
 class Curso
@@ -45,6 +46,33 @@ class Curso
         unset($data['hour']);
 
         $this->cursoRepository->create($data);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function show(int $id)
+    {
+        $curso = $this->cursoRepository->findFirst('id', $id);
+        $curso->data_inicio = StringHelper::replaceRegex($curso->data_inicio, '/\:[\d]+$/i', '');
+
+        return $curso;
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @return void
+     */
+    public function update(array $data, int $id)
+    {
+        $data['data_inicio'] = $this->formatDate($data['date'], $data['hour']);
+
+        unset($data['date']);
+        unset($data['hour']);
+
+        $this->cursoRepository->update($data, $id);
     }
 
     /**

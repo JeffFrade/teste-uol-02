@@ -62,6 +62,32 @@ class CursoController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return Factory|View
+     */
+    public function edit(int $id)
+    {
+        $curso = $this->curso->show($id);
+
+        return view('curso.edit', compact('curso'));
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse|Redirector
+     * @throws ValidationException
+     */
+    public function update(Request $request, int $id)
+    {
+        $params = $this->toValidate($request);
+        $this->curso->update($params, $id);
+
+        return redirect(route('cursos.index'))
+            ->with('message', 'Curso editado com sucesso!');
+    }
+
+    /**
      * @param Request $request
      * @return array
      * @throws ValidationException
