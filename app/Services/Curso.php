@@ -56,7 +56,14 @@ class Curso
     public function show(int $id)
     {
         $curso = $this->cursoRepository->findFirst('id', $id);
-        $curso->data_inicio = StringHelper::replaceRegex($curso->data_inicio, '/\:[\d]+$/i', '');
+
+        if (!empty($curso)) {
+            $curso->data_inicio = StringHelper::replaceRegex(
+                $curso->data_inicio ?? '',
+                '/\:[\d]+$/i',
+                ''
+            );
+        }
 
         return $curso;
     }

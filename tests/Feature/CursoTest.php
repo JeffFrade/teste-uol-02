@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Services\Aluno;
+use App\Exceptions\CursoNotFoundException;
 use App\Services\Curso;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -70,5 +70,22 @@ class CursoTest extends TestCase
         $curso = $curso->show(1);
 
         $this->assertEquals('Admin', $curso->nome);
+    }
+
+    public function testCursoDelete(): void
+    {
+        $curso = new Curso();
+        $curso->delete(2);
+
+        $curso = $curso->show(2);
+        $this->assertEmpty($curso);
+    }
+
+    public function testCursoDeleteCursoNotFoundException(): void
+    {
+        $this->expectException(CursoNotFoundException::class);
+
+        $curso = new Curso();
+        $curso->delete(2000);
     }
 }
