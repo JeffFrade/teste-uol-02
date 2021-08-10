@@ -69,6 +69,7 @@ class AlunoController extends Controller
     /**
      * @param int $id
      * @return Factory|View
+     * @throws AlunoNotFoundException
      */
     public function edit(int $id)
     {

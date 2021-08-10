@@ -51,10 +51,17 @@ class Aluno
     /**
      * @param int $id
      * @return mixed
+     * @throws AlunoNotFoundException
      */
     public function show(int $id)
     {
-        return $this->alunoRepository->findFirst('id', $id);
+        $aluno = $this->alunoRepository->findFirst('id', $id);
+
+        if (empty($aluno)) {
+            throw new AlunoNotFoundException('Aluno inexistente');
+        }
+
+        return $aluno;
     }
 
     /**
@@ -79,10 +86,6 @@ class Aluno
     public function delete(int $id)
     {
         $aluno = $this->show($id);
-
-        if (empty($aluno)) {
-            throw new AlunoNotFoundException('Aluno inexistente');
-        }
 
         $this->alunoRepository->delete($id);
     }

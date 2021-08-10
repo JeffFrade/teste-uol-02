@@ -58,6 +58,14 @@ class CursoTest extends TestCase
         $this->assertNotEmpty($curso);
     }
 
+    public function testCursoShowCursoNotFoundException(): void
+    {
+        $this->expectException(CursoNotFoundException::class);
+
+        $curso = new Curso();
+        $curso->show(2000);
+    }
+
     public function testCursoUpdate(): void
     {
         $curso = new Curso();
@@ -74,11 +82,13 @@ class CursoTest extends TestCase
 
     public function testCursoDelete(): void
     {
+        $this->expectException(CursoNotFoundException::class);
+
         $curso = new Curso();
         $curso->delete(2);
 
         $curso = $curso->show(2);
-        $this->assertEmpty($curso);
+        $this->expectExceptionMessage('Curso inexistente');
     }
 
     public function testCursoDeleteCursoNotFoundException(): void

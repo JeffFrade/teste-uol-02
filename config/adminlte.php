@@ -255,6 +255,12 @@ return [
             'icon'        => 'fa fa-university',
             'active'      => ['dashboard/cursos', 'dashboard/cursos*', 'dashboard/cursos?*']
         ],
+        [
+            'text'        => 'Matrículas',
+            'url'         => 'dashboard/matriculas',
+            'icon'        => 'fa fa-address-card',
+            'active'      => ['dashboard/matriculas', 'dashboard/matriculas*', 'dashboard/matriculas?*']
+        ],
     ],
 
     /*

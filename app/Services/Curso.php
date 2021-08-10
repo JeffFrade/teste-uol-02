@@ -52,6 +52,7 @@ class Curso
     /**
      * @param int $id
      * @return mixed
+     * @throws CursoNotFoundException
      */
     public function show(int $id)
     {
@@ -63,9 +64,11 @@ class Curso
                 '/\:[\d]+$/i',
                 ''
             );
+
+            return $curso;
         }
 
-        return $curso;
+        throw new CursoNotFoundException('Curso inexistente');
     }
 
     /**
@@ -92,10 +95,6 @@ class Curso
     public function delete(int $id)
     {
         $curso = $this->show($id);
-
-        if (empty($curso)) {
-            throw new CursoNotFoundException('Curso inexistente');
-        }
 
         $this->cursoRepository->delete($id);
     }

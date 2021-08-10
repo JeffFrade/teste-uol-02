@@ -69,6 +69,7 @@ class CursoController extends Controller
     /**
      * @param int $id
      * @return Factory|View
+     * @throws CursoNotFoundException
      */
     public function edit(int $id)
     {
