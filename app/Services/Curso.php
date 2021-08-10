@@ -74,10 +74,12 @@ class Curso
     /**
      * @param array $data
      * @param int $id
-     * @return void
+     * @throws CursoNotFoundException
      */
     public function update(array $data, int $id)
     {
+        $this->show($id);
+
         if (isset($data['date']) && isset($data['hour'])) {
             $data['data_inicio'] = $this->formatDate($data['date'], $data['hour']);
 

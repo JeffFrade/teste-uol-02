@@ -80,6 +80,21 @@ class AlunoTest extends TestCase
         $this->assertEquals('admin@mail.com', $aluno->email);
     }
 
+    public function testAlunoUpdateAlunoNotFoundException(): void
+    {
+        $this->expectException(AlunoNotFoundException::class);
+
+        $aluno = new Aluno();
+
+        $data = [
+            'email' => 'admin@mail.com'
+        ];
+
+        $aluno->update($data, 2000);
+
+        $this->expectExceptionMessage('Aluno inexistente');
+    }
+
     public function testAlunoDelete(): void
     {
         $this->expectException(AlunoNotFoundException::class);

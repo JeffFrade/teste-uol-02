@@ -67,13 +67,15 @@ class Aluno
     /**
      * @param array $data
      * @param int $id
-     * @return void
+     * @throws AlunoNotFoundException
      */
     public function update(array $data, int $id)
     {
         if (isset($data['senha'])) {
             $data['senha'] = bcrypt($data['senha']);
         }
+
+        $this->show($id);
 
         $this->alunoRepository->update($data, $id);
     }

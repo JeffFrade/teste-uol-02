@@ -68,14 +68,18 @@ class AlunoController extends Controller
 
     /**
      * @param int $id
-     * @return Factory|View
-     * @throws AlunoNotFoundException
+     * @return Factory|RedirectResponse|Redirector|View
      */
     public function edit(int $id)
     {
-        $aluno = $this->aluno->show($id);
+        try {
+            $aluno = $this->aluno->show($id);
 
-        return view('aluno.edit', compact('aluno'));
+            return view('aluno.edit', compact('aluno'));
+        } catch (AlunoNotFoundException $e) {
+            return redirect(route('alunos.index'))
+                ->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -86,11 +90,16 @@ class AlunoController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $params = $this->toValidate($request, true);
-        $this->aluno->update($params, $id);
+        try {
+            $params = $this->toValidate($request, true);
+            $this->aluno->update($params, $id);
 
-        return redirect(route('alunos.index'))
-            ->with('message', 'Aluno editado com sucesso!');
+            return redirect(route('alunos.index'))
+                ->with('message', 'Aluno editado com sucesso!');
+        } catch (AlunoNotFoundException $e) {
+            return redirect(route('alunos.index'))
+                ->with('error', $e->getMessage());
+        }
     }
 
     /**

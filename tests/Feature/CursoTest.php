@@ -80,6 +80,20 @@ class CursoTest extends TestCase
         $this->assertEquals('Admin', $curso->nome);
     }
 
+    public function testCursoUpdateCursoNotFoundException(): void
+    {
+        $this->expectException(CursoNotFoundException::class);
+
+        $curso = new Curso();
+
+        $data = [
+            'nome' => 'Admin'
+        ];
+
+        $curso->update($data, 1000);
+        $this->expectExceptionMessage('Curso inexistente');
+    }
+
     public function testCursoDelete(): void
     {
         $this->expectException(CursoNotFoundException::class);
