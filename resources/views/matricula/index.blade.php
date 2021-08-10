@@ -70,9 +70,9 @@
                                 <td>{{ \App\Helpers\DateHelper::formatDateWithoutCarbon($matricula->data_admissao, 'd/m/Y - H:i') }}</td>
                                 <td style="width: 1%" nowrap="">
                                     @if($matricula->ativo == 1)
-                                        <a href="#" class="btn btn-danger btn-xs btn-status" title="Desativar Matrícula"><i class="fa fa-ban"></i></a>
+                                        <a href="#" class="btn btn-danger btn-xs btn-status" title="Desativar Matrícula" data-id="{{ $matricula->id }}"><i class="fa fa-ban"></i></a>
                                     @else
-                                        <a href="#" class="btn btn-success btn-xs btn-status" title="Ativar Matrícula"><i class="fa fa-check"></i></a>
+                                        <a href="#" class="btn btn-success btn-xs btn-status" title="Ativar Matrícula" data-id="{{ $matricula->id }}"><i class="fa fa-check"></i></a>
                                     @endif
                                     &nbsp;
                                     <a href="#" class="btn btn-light btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
@@ -107,6 +107,36 @@
 
             $(document).find('input').val('');
             $(".select2").val(null).trigger("change");
+        });
+
+        $('.btn-status').on('click', function (e) {
+            e.preventDefault();
+            $('.overlay').removeClass('overlay-hidden');
+            if (confirm('Deseja alterar o status da matrícula?')) {
+                $.ajax({
+                    contentType: 'application/x-www-form-urlencoded',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    method: 'PUT',
+                    url: 'matriculas/update-status/' + $(this).data('id'),
+                    timeout: 0,
+                    success: function (response) {
+
+                        $.notify({message: response.message}, {type: 'success'});
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
+                    },
+                    error: function (err) {
+                        $.notify({message: err.error ?? 'Ocorreu um erro, favor consultar a TI'}, {type: 'danger'});
+                        console.error(err);
+                        $('.overlay').addClass('overlay-hidden');
+                    }
+                });
+            } else {
+                $('.overlay').addClass('overlay-hidden');
+            }
         });
     </script>
 @stop

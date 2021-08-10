@@ -3,15 +3,20 @@
 namespace App\Http;
 
 use App\Core\Support\Controller;
+use App\Core\Support\Traits\ErrorTrait;
+use App\Exceptions\MatriculaNotFoundException;
 use App\Services\Aluno;
 use App\Services\Curso;
 use App\Services\Matricula;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class MatriculaController extends Controller
 {
+    use ErrorTrait;
+
     /**
      * @var Matricula
      */
@@ -54,8 +59,20 @@ class MatriculaController extends Controller
         return view('matricula.index', compact('params', 'matriculas', 'alunos', 'cursos'));
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public function updateStatus(int $id)
     {
+        try {
+            $this->matricula->updateStatus($id);
 
+            return response()->json([
+                'message' => 'Troca de status efetuada com sucesso!'
+            ]);
+        } catch (MatriculaNotFoundException $e) {
+            return response()->json($this->errorFromException($e));
+        }
     }
 }
