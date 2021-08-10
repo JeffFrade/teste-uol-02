@@ -1,0 +1,19 @@
+.overlay-hidden {
+    display: none !important;
+}
+
+.pull-right {
+    float: right;
+}
+
+.required {
+    color: #F00;
+}
+
+.label {
+    font-size: 15px;
+}
+
+.margin-form {
+    margin-top: 32px;
+}
