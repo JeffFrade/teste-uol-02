@@ -14,10 +14,11 @@
                 <div class="card-header bg-secondary">
                     <div class="row">
                         <div class="col-md-9">
+                            <label for="search">Nome/E-mail:</label>
                             <input type="text" id="search" name="search" class="form-control" placeholder="Nome/E-mail" value="{{ $params['search'] ?? '' }}">
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-3 margin-form">
                             <button type="submit" class="btn btn-primary btn-filter"><i class="fa fa-search"></i>&nbsp; Buscar</button>
                             &nbsp;
                             <a href="{{ route('alunos.create') }}" class="btn btn-light"><i class="fa fa-plus"></i>&nbsp; Cadastrar Aluno</a>

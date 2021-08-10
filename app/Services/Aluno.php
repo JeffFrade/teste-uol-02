@@ -51,22 +51,31 @@ class Aluno
     /**
      * @param int $id
      * @return mixed
+     * @throws AlunoNotFoundException
      */
     public function show(int $id)
     {
-        return $this->alunoRepository->findFirst('id', $id);
+        $aluno = $this->alunoRepository->findFirst('id', $id);
+
+        if (empty($aluno)) {
+            throw new AlunoNotFoundException('Aluno inexistente');
+        }
+
+        return $aluno;
     }
 
     /**
      * @param array $data
      * @param int $id
-     * @return void
+     * @throws AlunoNotFoundException
      */
     public function update(array $data, int $id)
     {
         if (isset($data['senha'])) {
             $data['senha'] = bcrypt($data['senha']);
         }
+
+        $this->show($id);
 
         $this->alunoRepository->update($data, $id);
     }
@@ -80,10 +89,15 @@ class Aluno
     {
         $aluno = $this->show($id);
 
-        if (empty($aluno)) {
-            throw new AlunoNotFoundException('Aluno inexistente');
-        }
-
         $this->alunoRepository->delete($id);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->alunoRepository
+            ->allNoTrashed();
     }
 }

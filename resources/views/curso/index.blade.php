@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Alunos')
+@section('title', 'Cursos')
 
 @section('content_header')
     <h1 class="m-0 text-dark">Cursos</h1>
@@ -14,14 +14,16 @@
                 <div class="card-header bg-secondary">
                     <div class="row">
                         <div class="col-md-5">
+                            <label for="name">Nome:</label>
                             <input type="text" id="name" name="name" class="form-control" placeholder="Nome" value="{{ $params['name'] ?? '' }}">
                         </div>
 
                         <div class="col-md-4">
+                            <label for="date">Data:</label>
                             <input type="text" name="date" id="date" class="form-control datepicker" placeholder="Data" value="{{ $params['date'] ?? '' }}">
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-3 margin-form">
                             <button type="submit" class="btn btn-primary btn-filter"><i class="fa fa-search"></i>&nbsp; Buscar</button>
                             &nbsp;
                             <a href="{{ route('cursos.create') }}" class="btn btn-light"><i class="fa fa-plus"></i>&nbsp; Cadastrar Curso</a>

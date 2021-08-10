@@ -28,10 +28,6 @@ class Curso
      */
     public function index(array $data)
     {
-        if (!empty($data['date'] ?? '')) {
-            $data['date'] = DateHelper::formatDateWithoutCarbon($data['date'], 'Y-m-d');
-        }
-
         return $this->cursoRepository->index($data['name'] ?? '', $data['date'] ?? '');
     }
 
@@ -52,6 +48,7 @@ class Curso
     /**
      * @param int $id
      * @return mixed
+     * @throws CursoNotFoundException
      */
     public function show(int $id)
     {
@@ -63,18 +60,22 @@ class Curso
                 '/\:[\d]+$/i',
                 ''
             );
+
+            return $curso;
         }
 
-        return $curso;
+        throw new CursoNotFoundException('Curso inexistente');
     }
 
     /**
      * @param array $data
      * @param int $id
-     * @return void
+     * @throws CursoNotFoundException
      */
     public function update(array $data, int $id)
     {
+        $this->show($id);
+
         if (isset($data['date']) && isset($data['hour'])) {
             $data['data_inicio'] = $this->formatDate($data['date'], $data['hour']);
 
@@ -92,10 +93,6 @@ class Curso
     public function delete(int $id)
     {
         $curso = $this->show($id);
-
-        if (empty($curso)) {
-            throw new CursoNotFoundException('Curso inexistente');
-        }
 
         $this->cursoRepository->delete($id);
     }
@@ -117,5 +114,14 @@ class Curso
     public function indiceCursos()
     {
         return $this->cursoRepository->indiceCursos();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->cursoRepository
+            ->allNoTrashed();
     }
 }

@@ -58,6 +58,14 @@ class AlunoTest extends TestCase
         $this->assertNotEmpty($aluno);
     }
 
+    public function testAlunoShowAlunoNotFoundException(): void
+    {
+        $this->expectException(AlunoNotFoundException::class);
+
+        $aluno = new Aluno();
+        $aluno->show(2000);
+    }
+
     public function testAlunoUpdate(): void
     {
         $aluno = new Aluno();
@@ -72,13 +80,30 @@ class AlunoTest extends TestCase
         $this->assertEquals('admin@mail.com', $aluno->email);
     }
 
+    public function testAlunoUpdateAlunoNotFoundException(): void
+    {
+        $this->expectException(AlunoNotFoundException::class);
+
+        $aluno = new Aluno();
+
+        $data = [
+            'email' => 'admin@mail.com'
+        ];
+
+        $aluno->update($data, 2000);
+
+        $this->expectExceptionMessage('Aluno inexistente');
+    }
+
     public function testAlunoDelete(): void
     {
+        $this->expectException(AlunoNotFoundException::class);
+
         $aluno = new Aluno();
         $aluno->delete(2);
 
         $aluno = $aluno->show(2);
-        $this->assertEmpty($aluno);
+        $this->expectExceptionMessage('Aluno inexistente');
     }
 
     public function testAlunoDeleteAlunoNotFoundException(): void
@@ -87,5 +112,16 @@ class AlunoTest extends TestCase
 
         $aluno = new Aluno();
         $aluno->delete(2000);
+
+        $this->expectExceptionMessage('Aluno inexistente');
+    }
+
+    public function testAlunoGetAll()
+    {
+        $aluno = new Aluno();
+        $total = $aluno->getAll()
+            ->count();
+
+        $this->assertGreaterThan(1, $total);
     }
 }

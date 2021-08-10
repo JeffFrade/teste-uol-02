@@ -37,4 +37,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::put('/update/{id}', 'CursoController@update')->name('cursos.update');
         Route::delete('/delete/{id}', 'CursoController@delete')->name('cursos.delete');
     });
+
+    Route::group(['prefix' => 'matriculas'], function () {
+        Route::get('/', 'MatriculaController@index')->name('matriculas.index');
+        Route::get('/create', 'MatriculaController@create')->name('matriculas.create');
+        Route::post('/store', 'MatriculaController@store')->name('matriculas.store');
+        Route::get('/edit/{id}', 'MatriculaController@edit')->name('matriculas.edit');
+        Route::put('/update/{id}', 'MatriculaController@update')->name('matriculas.update');
+        Route::delete('/delete/{id}', 'MatriculaController@delete')->name('matricula.delete');
+        Route::put('/update-status/{id}', 'MatriculaController@updateStatus')->name('matriculas.status');
+    });
 });

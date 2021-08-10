@@ -68,13 +68,18 @@ class CursoController extends Controller
 
     /**
      * @param int $id
-     * @return Factory|View
+     * @return Factory|RedirectResponse|Redirector|View
      */
     public function edit(int $id)
     {
-        $curso = $this->curso->show($id);
+        try {
+            $curso = $this->curso->show($id);
 
-        return view('curso.edit', compact('curso'));
+            return view('curso.edit', compact('curso'));
+        } catch (CursoNotFoundException $e) {
+            return redirect(route('cursos.index'))
+                ->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -85,11 +90,16 @@ class CursoController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $params = $this->toValidate($request);
-        $this->curso->update($params, $id);
+        try {
+            $params = $this->toValidate($request);
+            $this->curso->update($params, $id);
 
-        return redirect(route('cursos.index'))
-            ->with('message', 'Curso editado com sucesso!');
+            return redirect(route('cursos.index'))
+                ->with('message', 'Curso editado com sucesso!');
+        } catch (CursoNotFoundException $e) {
+            return redirect(route('cursos.index'))
+                ->with('error', $e->getMessage());
+        }
     }
 
     /**

@@ -9,3 +9,11 @@
 .required {
     color: #F00;
 }
+
+.label {
+    font-size: 15px;
+}
+
+.margin-form {
+    margin-top: 32px;
+}
