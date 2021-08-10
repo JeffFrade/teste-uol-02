@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Exceptions\AlunoNotFoundException;
+use App\Exceptions\CursoNotFoundException;
 use App\Exceptions\MatriculaNotFoundException;
 use App\Services\Matricula;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -22,6 +24,67 @@ class MatriculaTest extends TestCase
         $matriculas = $matricula->index($data);
 
         $this->assertGreaterThan(1, $matriculas->count());
+    }
+
+    public function testMatriculaStore(): void
+    {
+        $matricula = new Matricula();
+
+        $data = [
+            'aluno_id' => 5,
+            'curso_id' => 7,
+            'ativo' => 1,
+            'data_admissao' => '2015-05-08'
+        ];
+
+        $matricula->store($data);
+
+        $data = [
+            'id_aluno' => 5,
+            'id_curso' => 7,
+            'status' => 1,
+            'date' => '2015-05-08'
+        ];
+
+        $matriculas = $matricula->index($data);
+
+        $this->assertEquals(1, $matriculas->count());
+    }
+
+    public function testMatriculaStoreAlunoNotFoundException(): void
+    {
+        $this->expectException(AlunoNotFoundException::class);
+
+        $matricula = new Matricula();
+
+        $data = [
+            'aluno_id' => 5000,
+            'curso_id' => 7,
+            'ativo' => 1,
+            'data_admissao' => '2015-05-08'
+        ];
+
+        $matricula->store($data);
+        
+        $this->expectExceptionMessage('Aluno inexistente');
+    }
+
+    public function testMatriculaStoreCursoNotFoundException(): void
+    {
+        $this->expectException(CursoNotFoundException::class);
+
+        $matricula = new Matricula();
+
+        $data = [
+            'aluno_id' => 5,
+            'curso_id' => 7000,
+            'ativo' => 1,
+            'data_admissao' => '2015-05-08'
+        ];
+
+        $matricula->store($data);
+
+        $this->expectExceptionMessage('Curso inexistente');
     }
 
     public function testMatriculaIndiceDashboard(): void
