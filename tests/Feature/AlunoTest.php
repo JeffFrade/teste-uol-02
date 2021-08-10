@@ -115,4 +115,13 @@ class AlunoTest extends TestCase
 
         $this->expectExceptionMessage('Aluno inexistente');
     }
+
+    public function testAlunoGetAll()
+    {
+        $aluno = new Aluno();
+        $total = $aluno->getAll()
+            ->count();
+
+        $this->assertGreaterThan(1, $total);
+    }
 }

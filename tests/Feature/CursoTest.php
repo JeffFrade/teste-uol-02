@@ -112,4 +112,13 @@ class CursoTest extends TestCase
         $curso = new Curso();
         $curso->delete(2000);
     }
+
+    public function testAlunoGetAll()
+    {
+        $curso = new Curso();
+        $total = $curso->getAll()
+            ->count();
+
+        $this->assertGreaterThan(1, $total);
+    }
 }
