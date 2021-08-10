@@ -91,4 +91,13 @@ class Aluno
 
         $this->alunoRepository->delete($id);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->alunoRepository
+            ->allNoTrashed();
+    }
 }

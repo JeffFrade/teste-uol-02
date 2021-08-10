@@ -28,10 +28,6 @@ class Curso
      */
     public function index(array $data)
     {
-        if (!empty($data['date'] ?? '')) {
-            $data['date'] = DateHelper::formatDateWithoutCarbon($data['date'], 'Y-m-d');
-        }
-
         return $this->cursoRepository->index($data['name'] ?? '', $data['date'] ?? '');
     }
 
@@ -118,5 +114,14 @@ class Curso
     public function indiceCursos()
     {
         return $this->cursoRepository->indiceCursos();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->cursoRepository
+            ->allNoTrashed();
     }
 }

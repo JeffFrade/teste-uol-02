@@ -37,4 +37,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::put('/update/{id}', 'CursoController@update')->name('cursos.update');
         Route::delete('/delete/{id}', 'CursoController@delete')->name('cursos.delete');
     });
+
+    Route::group(['prefix' => 'matriculas'], function () {
+        Route::get('/', 'MatriculaController@index')->name('matriculas.index');
+    });
 });

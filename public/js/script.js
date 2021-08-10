@@ -19,7 +19,7 @@ $('.form-success').each(function (index) {
 });
 
 $('.datepicker').datepicker({
-    format: "dd/mm/yyyy",
+    format: "yyyy-mm-dd",
     clearBtn: true,
     language: "pt-BR",
     multidate: false,
@@ -27,4 +27,6 @@ $('.datepicker').datepicker({
     todayHighlight: true
 });
 
-
+$('.select2').select2({
+    placeholder: 'Selecione uma Opção'
+});
