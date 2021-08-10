@@ -34,6 +34,31 @@ class Curso
     }
 
     /**
+     * @param array $data
+     * @return void
+     */
+    public function store(array $data)
+    {
+        $data['data_inicio'] = $this->formatDate($data['date'], $data['hour']);
+
+        unset($data['date']);
+        unset($data['hour']);
+
+        $this->cursoRepository->create($data);
+    }
+
+    /**
+     * @param string $date
+     * @param string $hour
+     * @return string
+     */
+    private function formatDate(string $date, string $hour)
+    {
+        $date = DateHelper::formatBrDate($date);
+        return sprintf('%s %s:00', $date, $hour);
+    }
+
+    /**
      * @return int
      */
     public function indiceCursos()

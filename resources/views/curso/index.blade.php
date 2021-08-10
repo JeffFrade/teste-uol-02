@@ -24,7 +24,7 @@
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-primary btn-filter"><i class="fa fa-search"></i>&nbsp; Buscar</button>
                             &nbsp;
-                            <a href="#" class="btn btn-light"><i class="fa fa-plus"></i>&nbsp; Cadastrar Curso</a>
+                            <a href="{{ route('cursos.create') }}" class="btn btn-light"><i class="fa fa-plus"></i>&nbsp; Cadastrar Curso</a>
                         </div>
                     </div>
                 </div>

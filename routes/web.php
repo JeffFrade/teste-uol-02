@@ -31,5 +31,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
     Route::group(['prefix' => 'cursos'], function () {
         Route::get('/', 'CursoController@index')->name('cursos.index');
+        Route::get('/create', 'CursoController@create')->name('cursos.create');
+        Route::post('/store', 'CursoController@store')->name('cursos.store');
     });
 });

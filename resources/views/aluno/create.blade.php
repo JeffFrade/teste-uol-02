@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Cadastrar Aluno')
 
 @section('content_header')
     <h1 class="m-0 text-dark">Cadastrar Aluno</h1>

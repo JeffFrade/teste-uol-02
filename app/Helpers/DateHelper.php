@@ -7,11 +7,11 @@ use Carbon\Carbon;
 class DateHelper
 {
     /**
-     * @param $date
-     * @param $format
+     * @param string $date
+     * @param string $format
      * @return string
      */
-    public static function formatDateWithoutCarbon($date, $format)
+    public static function formatDateWithoutCarbon(string $date, string $format)
     {
         $formatted = '';
 
@@ -22,5 +22,14 @@ class DateHelper
         }
 
         return $formatted;
+    }
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    public static function formatBrDate(string $date)
+    {
+        return implode('-', array_reverse(explode('/', $date)));
     }
 }

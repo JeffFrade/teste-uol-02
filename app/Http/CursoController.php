@@ -5,7 +5,10 @@ namespace App\Http;
 use App\Core\Support\Controller;
 use App\Services\Curso;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class CursoController extends Controller
@@ -34,5 +37,43 @@ class CursoController extends Controller
         $cursos = $this->curso->index($params);
 
         return view('curso.index', compact('params', 'cursos'));
+    }
+
+    /**
+     * @return Factory|View
+     */
+    public function create()
+    {
+        return view ('curso.create');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Redirector
+     * @throws ValidationException
+     */
+    public function store(Request $request)
+    {
+        $params = $this->toValidate($request);
+        $this->curso->store($params);
+
+        return redirect(route('cursos.index'))
+            ->with('message', 'Curso cadastrado com sucesso!');
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     * @throws ValidationException
+     */
+    protected function toValidate(Request $request)
+    {
+        $toValidateArr = [
+            'nome' => 'required|max:255',
+            'date' => 'required|size:10',
+            'hour' => 'required|size:5'
+        ];
+
+        return $this->validate($request, $toValidateArr);
     }
 }
