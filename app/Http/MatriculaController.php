@@ -136,6 +136,23 @@ class MatriculaController extends Controller
      * @param int $id
      * @return JsonResponse
      */
+    public function delete(int $id)
+    {
+        try {
+            $this->matricula->delete($id);
+
+            return response()->json([
+                'message' => 'Matrícula excluída com sucesso!'
+            ]);
+        } catch (MatriculaNotFoundException $e) {
+            return response()->json($this->errorFromException($e));
+        }
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public function updateStatus(int $id)
     {
         try {

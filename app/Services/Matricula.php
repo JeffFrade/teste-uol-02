@@ -108,6 +108,17 @@ class Matricula
     }
 
     /**
+     * @param int $id
+     * @throws MatriculaNotFoundException
+     */
+    public function delete(int $id)
+    {
+        $this->show($id);
+
+        $this->matriculaRepository->delete($id);
+    }
+
+    /**
      * @return int
      */
     public function indiceMatriculasAtivas()

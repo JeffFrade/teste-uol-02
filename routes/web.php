@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::post('/store', 'MatriculaController@store')->name('matriculas.store');
         Route::get('/edit/{id}', 'MatriculaController@edit')->name('matriculas.edit');
         Route::put('/update/{id}', 'MatriculaController@update')->name('matriculas.update');
+        Route::delete('/delete/{id}', 'MatriculaController@delete')->name('matricula.delete');
         Route::put('/update-status/{id}', 'MatriculaController@updateStatus')->name('matriculas.status');
     });
 });
