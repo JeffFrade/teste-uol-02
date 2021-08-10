@@ -69,3 +69,38 @@
         </div>
     </div>
 @stop
+
+@section('js')
+    <script type="text/javascript">
+        $('.btn-del').on('click', function (e) {
+            e.preventDefault();
+            $('.overlay').removeClass('overlay-hidden');
+            if (confirm('Deseja excluir o curso?')) {
+                $.ajax({
+                    contentType: 'application/x-www-form-urlencoded',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    method: 'DELETE',
+                    url: 'cursos/delete/' + $(this).data('id'),
+                    timeout: 0,
+                    success: function (response) {
+
+                        $.notify({message: response.message}, {type: 'success'});
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
+                    },
+                    error: function (err) {
+                        $.notify({message: err.error ?? 'Ocorreu um erro, favor consultar a TI'}, {type: 'danger'});
+                        console.error(err);
+                        $('.overlay').addClass('overlay-hidden');
+                    }
+                });
+            } else {
+                $('.overlay').addClass('overlay-hidden');
+            }
+        });
+    </script>
+@stop
+

@@ -35,5 +35,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::post('/store', 'CursoController@store')->name('cursos.store');
         Route::get('/edit/{id}', 'CursoController@edit')->name('cursos.edit');
         Route::put('/update/{id}', 'CursoController@update')->name('cursos.update');
+        Route::delete('/delete/{id}', 'CursoController@delete')->name('cursos.delete');
     });
 });

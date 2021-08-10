@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\CursoNotFoundException;
 use App\Helpers\DateHelper;
 use App\Helpers\StringHelper;
 use App\Repositories\CursoRepository;
@@ -75,6 +76,21 @@ class Curso
         }
 
         $this->cursoRepository->update($data, $id);
+    }
+
+    /**
+     * @param int $id
+     * @throws CursoNotFoundException
+     */
+    public function delete(int $id)
+    {
+        $curso = $this->show($id);
+
+        if (empty($curso)) {
+            throw new CursoNotFoundException('Curso inexistente');
+        }
+
+        $this->cursoRepository->delete($id);
     }
 
     /**

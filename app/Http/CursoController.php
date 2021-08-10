@@ -3,8 +3,11 @@
 namespace App\Http;
 
 use App\Core\Support\Controller;
+use App\Core\Support\Traits\ErrorTrait;
+use App\Exceptions\CursoNotFoundException;
 use App\Services\Curso;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -13,6 +16,8 @@ use Illuminate\View\View;
 
 class CursoController extends Controller
 {
+    use ErrorTrait;
+
     /**
      * @var Curso
      */
@@ -85,6 +90,23 @@ class CursoController extends Controller
 
         return redirect(route('cursos.index'))
             ->with('message', 'Curso editado com sucesso!');
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function delete(int $id)
+    {
+        try {
+            $this->curso->delete($id);
+
+            return response()->json([
+                'message' => 'Curso excluído com sucesso!'
+            ]);
+        } catch (CursoNotFoundException $e) {
+            return response()->json($this->errorFromException($e));
+        }
     }
 
     /**

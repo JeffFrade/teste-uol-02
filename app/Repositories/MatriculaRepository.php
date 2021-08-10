@@ -24,4 +24,13 @@ class MatriculaRepository extends AbstractRepository
         $this->model->where('aluno_id', $id)
             ->delete();
     }
+
+    /**
+     * @param int $id
+     */
+    public function deleteByIdCurso(int $id)
+    {
+        $this->model->where('curso_id', $id)
+            ->delete();
+    }
 }
