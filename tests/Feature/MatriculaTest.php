@@ -87,6 +87,70 @@ class MatriculaTest extends TestCase
         $this->expectExceptionMessage('Curso inexistente');
     }
 
+    public function testMatriculaUpdate(): void
+    {
+        $matricula = new Matricula();
+
+        $data = [
+            'aluno_id' => 50,
+            'curso_id' => 7
+        ];
+
+        $matricula->update($data, 1);
+        $matricula = $matricula->show(1);
+
+        $this->assertEquals(50, $matricula->aluno_id);
+        $this->assertEquals(7, $matricula->curso_id);
+    }
+
+    public function testMatriculaUpdateMatriculaNotFoundException(): void
+    {
+        $this->expectException(MatriculaNotFoundException::class);
+
+        $matricula = new Matricula();
+
+        $data = [
+            'aluno_id' => 50,
+            'curso_id' => 7
+        ];
+
+        $matricula->update($data, 1000);
+
+        $this->expectExceptionMessage('Matrícula inexistente');
+    }
+
+    public function testMatriculaUpdateAlunoNotFoundException(): void
+    {
+        $this->expectException(AlunoNotFoundException::class);
+
+        $matricula = new Matricula();
+
+        $data = [
+            'aluno_id' => 5000,
+            'curso_id' => 7
+        ];
+
+        $matricula->update($data, 1);
+
+        $this->expectExceptionMessage('Aluno inexistente');
+    }
+
+    public function testMatriculaUpdateCursoNotFoundException(): void
+    {
+        $this->expectException(CursoNotFoundException::class);
+
+        $matricula = new Matricula();
+
+        $data = [
+            'aluno_id' => 50,
+            'curso_id' => 7000
+        ];
+
+        $matricula->update($data, 1);
+
+        $this->expectExceptionMessage('Curso inexistente');
+    }
+
     public function testMatriculaIndiceDashboard(): void
     {
         $matricula = new Matricula();

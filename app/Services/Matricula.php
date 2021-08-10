@@ -99,7 +99,10 @@ class Matricula
         $this->show($id);
         $this->aluno->show($data['aluno_id']);
         $this->curso->show($data['curso_id']);
-        $data['data_admissao'] .= ' 00:00:00';
+
+        if (!empty($data['data_admissao'])) {
+            $data['data_admissao'] .= ' 00:00:00';
+        }
 
         $this->matriculaRepository->update($data, $id);
     }
