@@ -35,5 +35,19 @@
                 <a href="{{ route('cursos.index') }}" class="small-box-footer">Mais Informações &nbsp;<i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
+
+        <div class="col-4">
+            <div class="small-box bg-blue">
+                <div class="inner">
+                    <h3>{{ $indiceMatriculasAtivas }}</h3>
+
+                    <p>Matrículas Ativas</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-address-card"></i>
+                </div>
+                <a href="{{ route('matriculas.index', ['status' => 1]) }}" class="small-box-footer">Mais Informações &nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
     </div>
 @stop

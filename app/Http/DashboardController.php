@@ -46,7 +46,8 @@ class DashboardController extends Controller
     {
         $indiceAlunos = $this->aluno->indiceAlunos();
         $indiceCursos = $this->curso->indiceCursos();
+        $indiceMatriculasAtivas = $this->matricula->indiceMatriculasAtivas();
 
-        return view('dashboard', compact('indiceAlunos', 'indiceCursos'));
+        return view('dashboard', compact('indiceAlunos', 'indiceCursos', 'indiceMatriculasAtivas'));
     }
 }

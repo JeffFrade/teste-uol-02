@@ -32,4 +32,12 @@ class Matricula
 
         return $this->matriculaRepository->index($idAluno, $idCurso, $status, $dataAdmissao);
     }
+
+    /**
+     * @return int
+     */
+    public function indiceMatriculasAtivas()
+    {
+        return $this->matriculaRepository->indiceMatriculasAtivas();
+    }
 }

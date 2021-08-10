@@ -65,4 +65,13 @@ class MatriculaRepository extends AbstractRepository
 
         return $model->paginate();
     }
+
+    /**
+     * @return int
+     */
+    public function indiceMatriculasAtivas()
+    {
+        return $this->model->where('ativo', 1)
+            ->count();
+    }
 }
