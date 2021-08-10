@@ -75,7 +75,7 @@
                                         <a href="#" class="btn btn-success btn-xs btn-status" title="Ativar Matrícula" data-id="{{ $matricula->id }}"><i class="fa fa-check"></i></a>
                                     @endif
                                     &nbsp;
-                                    <a href="#" class="btn btn-light btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
+                                    <a href="{{ route('matriculas.edit', ['id' => $matricula->id]) }}" class="btn btn-light btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
                                     &nbsp;
                                     <a href="#" class="btn btn-danger btn-xs btn-del" data-id="{{ $matricula->id }}" title="Excluir"><i class="fa fa-trash"></i></a>
                                 </td>

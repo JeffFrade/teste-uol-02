@@ -56,16 +56,16 @@ class Matricula
      */
     public function show(int $id)
     {
-        $matriculas = $this->matriculaRepository->findFirst('id', $id);
+        $matricula = $this->matriculaRepository->findFirst('id', $id);
 
-        if (!empty($matriculas)) {
-            $matriculas->data_admissao = StringHelper::replaceRegex(
-                $curso->data_admissao ?? '',
-                '/\:[\d]+$/i',
+        if (!empty($matricula)) {
+            $matricula->data_admissao = StringHelper::replaceRegex(
+                $matricula->data_admissao ?? '',
+                '/\s[\w\W]+/i',
                 ''
             );
 
-            return $matriculas;
+            return $matricula;
         }
 
         throw new MatriculaNotFoundException('Matrícula inexistente');
@@ -75,6 +75,7 @@ class Matricula
      * @param array $data
      * @throws AlunoNotFoundException
      * @throws CursoNotFoundException
+     * @return void
      */
     public function store(array $data)
     {
@@ -83,6 +84,24 @@ class Matricula
         $data['data_admissao'] .= ' 00:00:00';
 
         $this->matriculaRepository->create($data);
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @throws AlunoNotFoundException
+     * @throws CursoNotFoundException
+     * @throws MatriculaNotFoundException
+     * @return void
+     */
+    public function update(array $data, int $id)
+    {
+        $this->show($id);
+        $this->aluno->show($data['aluno_id']);
+        $this->curso->show($data['curso_id']);
+        $data['data_admissao'] .= ' 00:00:00';
+
+        $this->matriculaRepository->update($data, $id);
     }
 
     /**

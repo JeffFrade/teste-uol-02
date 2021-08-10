@@ -65,7 +65,7 @@ class MatriculaTest extends TestCase
         ];
 
         $matricula->store($data);
-        
+
         $this->expectExceptionMessage('Aluno inexistente');
     }
 

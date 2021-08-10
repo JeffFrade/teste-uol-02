@@ -96,6 +96,44 @@ class MatriculaController extends Controller
 
     /**
      * @param int $id
+     * @return Factory|RedirectResponse|Redirector|View
+     */
+    public function edit(int $id)
+    {
+        try {
+            $alunos = $this->aluno->getAll();
+            $cursos = $this->curso->getAll();
+            $matricula = $this->matricula->show($id);
+
+            return view('matricula.edit', compact('alunos', 'cursos', 'matricula'));
+        } catch (MatriculaNotFoundException $e) {
+            return redirect(route('matriculas.index'))
+                ->with('error', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse|Redirector
+     * @throws ValidationException
+     */
+    public function update(Request $request, int $id)
+    {
+        try {
+            $params = $this->toValidate($request);
+            $this->matricula->update($params, $id);
+
+            return redirect(route('matriculas.index'))
+                ->with('message', 'Matrícula atualizada com sucesso!');
+        } catch (AlunoNotFoundException | CursoNotFoundException | MatriculaNotFoundException $e) {
+            return redirect(route('matriculas.index'))
+                ->with('error', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param int $id
      * @return JsonResponse
      */
     public function updateStatus(int $id)

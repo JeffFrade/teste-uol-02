@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('/', 'MatriculaController@index')->name('matriculas.index');
         Route::get('/create', 'MatriculaController@create')->name('matriculas.create');
         Route::post('/store', 'MatriculaController@store')->name('matriculas.store');
+        Route::get('/edit/{id}', 'MatriculaController@edit')->name('matriculas.edit');
+        Route::put('/update/{id}', 'MatriculaController@update')->name('matriculas.update');
         Route::put('/update-status/{id}', 'MatriculaController@updateStatus')->name('matriculas.status');
     });
 });
