@@ -1,24 +1,24 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Aluno')
+@section('title', 'Cadastrar Curso')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Editar Aluno</h1>
+    <h1 class="m-0 text-dark">Cadastrar Curso</h1>
 @stop
 
 @section('content')
     <div class="card">
-        {{ Form::open(['method' => 'PUT', 'route' => ['alunos.update', ['id' => $aluno->id]]]) }}
+        {{ Form::open(['method' => 'POST', 'route' => 'cursos.store']) }}
         <div class="card-header bg-secondary">
-            <h3 class="card-title"><i class="fa fa-user-plus"></i>&nbsp; Editar Aluno</h3>
+            <h3 class="card-title"><i class="fa fa-plus"></i>&nbsp; Cadastrar Curso</h3>
         </div>
 
         <div class="card-body">
-            @include('aluno._form')
+            @include('curso._form')
         </div>
 
         <div class="card-footer">
-            <a href="{{ route('alunos.index') }}" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; Cancelar</a>
+            <a href="{{ route('cursos.index') }}" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; Cancelar</a>
 
             <button type="submit" class="btn btn-primary pull-right btn-save"><i class="fa fa-save"></i>&nbsp; Salvar</button>
         </div>

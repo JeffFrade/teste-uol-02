@@ -7,6 +7,9 @@ use App\Repositories\Models\Aluno;
 
 class AlunoObserver
 {
+    /**
+     * @param Aluno $aluno
+     */
     public function deleting(Aluno $aluno)
     {
         $matriculaRepository = new MatriculaRepository();

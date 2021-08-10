@@ -28,4 +28,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::put('/update/{id}', 'AlunoController@update')->name('alunos.update');
         Route::delete('/delete/{id}', 'AlunoController@delete')->name('alunos.delete');
     });
+
+    Route::group(['prefix' => 'cursos'], function () {
+        Route::get('/', 'CursoController@index')->name('cursos.index');
+        Route::get('/create', 'CursoController@create')->name('cursos.create');
+        Route::post('/store', 'CursoController@store')->name('cursos.store');
+        Route::get('/edit/{id}', 'CursoController@edit')->name('cursos.edit');
+        Route::put('/update/{id}', 'CursoController@update')->name('cursos.update');
+        Route::delete('/delete/{id}', 'CursoController@delete')->name('cursos.delete');
+    });
 });

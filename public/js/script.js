@@ -1,12 +1,3 @@
-$('.btn-clear').on('click', function (e) {
-    e.preventDefault();
-
-    $(document).find('input').val('');
-    $(document).find('textarea').val('');
-    $(".multi-select").val(null).trigger("change");
-    $(".single-select").val(null).trigger("change");
-});
-
 $('.btn-overlay').on('click', function (e) {
     $('.overlay').removeClass('overlay-hidden');
 });

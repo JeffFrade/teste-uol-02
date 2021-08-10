@@ -249,6 +249,12 @@ return [
             'icon'        => 'fa fa-users',
             'active'      => ['dashboard/alunos', 'dashboard/alunos*', 'dashboard/alunos?*']
         ],
+        [
+            'text'        => 'Cursos',
+            'url'         => 'dashboard/cursos',
+            'icon'        => 'fa fa-university',
+            'active'      => ['dashboard/cursos', 'dashboard/cursos*', 'dashboard/cursos?*']
+        ],
     ],
 
     /*
