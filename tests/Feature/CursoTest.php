@@ -10,7 +10,7 @@ class CursoTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testAlunosIndex(): void
+    public function testCursosIndex(): void
     {
         $curso = new Curso();
         $params = [];
@@ -20,12 +20,32 @@ class CursoTest extends TestCase
         $this->assertEquals(1, $cursos->lastPage());
     }
 
-    public function testAlunosIndiceDashboard(): void
+    public function testCursosIndiceDashboard(): void
     {
         $curso = new Curso();
         $total = $curso->indiceCursos();
 
         $this->assertEquals(10, $total);
         $this->assertIsInt($total);
+    }
+
+    public function testCursoStore(): void
+    {
+        $curso = new Curso();
+
+        $params = [
+            'nome' => 'Admin',
+            'date' => '15/06/2018',
+            'hour' => '15:30'
+        ];
+
+        $curso->store($params);
+
+        $params = [
+            'name' => 'Admin',
+        ];
+
+        $curso = $curso->index($params);
+        $this->assertEquals(1, $curso->count());
     }
 }
